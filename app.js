@@ -56,7 +56,6 @@ app.post('/usuarios', (req, res)=>{
 app.put('/usuarios/:nombre', (req, res)=>{
     const indiceUsuario = usuarios.findIndex(usuario => usuario.nombre === req.params.nombre);    
     
-
     usuarios[indiceUsuario]={
         id:req.body.id,
         nombre:req.body.nombre,
@@ -65,7 +64,12 @@ app.put('/usuarios/:nombre', (req, res)=>{
     }
 
     res.json(usuarios[indiceUsuario]);
+})
 
+app.delete('/usuarios/:nombre', (req, res)=>{
+    const indiceUsuario = usuarios.findIndex(usuario => usuario.nombre === req.params.nombre);
+    usuarios.splice(indiceUsuario,1);
+    res.redirect('/usuarios');
 })
 
 app.listen(3000, ()=>{
